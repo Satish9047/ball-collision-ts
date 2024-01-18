@@ -45,6 +45,8 @@ export class Ball implements IBall{
 
         this.element = document.createElement("div");
         this.element.classList.add("ball");
+
+
     }
 
     getElement(): HTMLElement{

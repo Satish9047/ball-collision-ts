@@ -5,7 +5,7 @@ import {getRandomColor, getRandomNumber} from "./utils/utils.ts";
 const ballsArray: Ball[] = [];
 let viewport;
 try {
-    viewport = document.getElementById("app");
+    viewport = document.getElementById("app")as HTMLElement;
     if(!viewport) throw new Error("viewport not found");
 } catch(ev){
     console.error(ev);
@@ -41,8 +41,8 @@ for (let i: number = 0; i < BALL_COUNT; i++) {
     const r = getRandomNumber(Math.min(MIN_BALL_RADIUS, MAX_BALL_RADIUS),MAX_BALL_RADIUS);
     const x = getRandomNumber(getViewPortStartX(r), getViewPortUsableWidth(r));
     const y = getRandomNumber(getViewPortStartY(r), getViewPortUsableHeight(r));
-//    const xSpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
-//    const ySpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
+    //    const xSpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
+    //    const ySpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
     const ballColor = getRandomColor();
     const ball: Ball = new Ball(x, y, r, ballColor);
 
@@ -57,12 +57,7 @@ function render() {
         const ball = ballsArray[i];
         ball.move();
         ball.draw();
-        collisionDetectBorder(
-            getViewPortStartX(ball.radius),
-            getViewPortStartY(ball.radius),
-            VIEWPORT_WIDTH,
-            VIEWPORT_HEIGHT
-            );
+        collisionDetectBorder(ball ,getViewPortStartX(ball.radius), getViewPortStartY(ball.radius), VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
         for (let j = i + 1; j < ballsArray.length; j++) {
             const otherBall = ballsArray[j];
