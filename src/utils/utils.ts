@@ -1,8 +1,8 @@
-import {Ball} from "../class/ball.ts";
+// import {Ball} from "../class/ball.ts";
 
 //return random number between min and max
-export function getRandomNumber (min: number, max: number): number{
-    return Math.floor(Math.random()*(max-min + 5) + min);
+export function getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 5) + min);
 }
 
 //collision detection between borders
@@ -14,17 +14,29 @@ export function getRandomNumber (min: number, max: number): number{
 //}
 
 //get random color
-export function getRandomColor(): string{
+export function getRandomColor(): string {
     const color: string[] = ["red", "blue", "green", "cyan", "white", "purple", "deeppink", "gold", "orange", "yellow"];
-    return color[Math.floor(Math.random()*color.length)];
+    return color[Math.floor(Math.random() * color.length)];
 }
 
 
 //distance between two points
-export function calculateDistance(x1: number, y1: number, x2:number, y2:number): number{
-    const distanceX: number = x2-x1;
-    const distanceY: number = y2-y1;
+export function calculateDistance(x1: number, y1: number, x2: number, y2: number): number {
+    const distanceX: number = x2 - x1;
+    const distanceY: number = y2 - y1;
 
     return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+}
+
+export function getRandomNumberOtherThan(min: number, max: number, number = 0) {
+    let randomNumber = getRandomNumber(min, max);
+    while (randomNumber === number) {
+        randomNumber = getRandomNumber(min, max);
+    }
+    return randomNumber;
+}
+
+export function setStyles(element:HTMLElement, styles = {}) {
+    Object.assign(element.style, styles);
 }
 

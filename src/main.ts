@@ -1,6 +1,7 @@
-import {Ball, collisionDetectBorder} from "./class/ball.ts";
-import {BALL_COUNT, BALL_SPEED, MAX_BALL_WIDTH, MAX_BALL_RADIUS, MIN_BALL_RADIUS} from "./constants.ts";
-import {getRandomColor, getRandomNumber} from "./utils/utils.ts";
+import {Ball} from "./class/ball.ts";
+import {BALL_COUNT, BALL_SPEED, MAX_BALL_RADIUS, MIN_BALL_RADIUS} from "./constants.ts";
+import {getRandomNumber} from "./utils/utils.ts";
+import { getRandomNumberOtherThan } from "./utils/utils.ts";
 
 const ballsArray: Ball[] = [];
 let viewport;
@@ -41,10 +42,10 @@ for (let i: number = 0; i < BALL_COUNT; i++) {
     const r = getRandomNumber(Math.min(MIN_BALL_RADIUS, MAX_BALL_RADIUS),MAX_BALL_RADIUS);
     const x = getRandomNumber(getViewPortStartX(r), getViewPortUsableWidth(r));
     const y = getRandomNumber(getViewPortStartY(r), getViewPortUsableHeight(r));
-    //    const xSpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
-    //    const ySpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
-    const ballColor = getRandomColor();
-    const ball: Ball = new Ball(x, y, r, ballColor);
+    const xSpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
+    const ySpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
+    // const ballColor = getRandomColor();
+    const ball: Ball = new Ball(x, y, r, xSpeed, ySpeed);
 
     ballsArray.push(ball);
     viewport.appendChild(ball.getElement());
@@ -57,7 +58,7 @@ function render() {
         const ball = ballsArray[i];
         ball.move();
         ball.draw();
-        collisionDetectBorder(ball ,getViewPortStartX(ball.radius), getViewPortStartY(ball.radius), VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        ball.checkWallCollison(getViewPortStartX(ball.radius), getViewPortStartY(ball.radius), VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
         for (let j = i + 1; j < ballsArray.length; j++) {
             const otherBall = ballsArray[j];
