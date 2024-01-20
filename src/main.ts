@@ -10,7 +10,6 @@ try {
     if(!viewport) throw new Error("viewport not found");
 } catch(ev){
     console.error(ev);
-    // viewport = document.body;
     viewport = document.createElement("div");
     viewport.id = "app";
     viewport.classList.add("view-port");
@@ -44,7 +43,6 @@ for (let i: number = 0; i < BALL_COUNT; i++) {
     const y = getRandomNumber(getViewPortStartY(r), getViewPortUsableHeight(r));
     const xSpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
     const ySpeed = getRandomNumberOtherThan(-BALL_SPEED, BALL_SPEED);
-    // const ballColor = getRandomColor();
     const ball: Ball = new Ball(x, y, r, xSpeed, ySpeed);
 
     ballsArray.push(ball);

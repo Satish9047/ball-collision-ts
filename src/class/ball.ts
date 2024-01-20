@@ -1,5 +1,4 @@
 import { getRandomColor, setStyles } from "../utils/utils.ts";
-// import { IwallCollision } from "../interface.ts";
 
 export interface IBall {
     x: number;
@@ -72,8 +71,6 @@ export class Ball implements IBall {
     move = () => {
         this.x += this.speedX;
         this.y += this.speedY;
-
-        // collisionDetectBorder(this, 0, 0, window.innerWidth, window.innerHeight);
     };
 
     //draw the ball on the screen
